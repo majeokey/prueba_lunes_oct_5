@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173c32">
+  <meta name="description" content="Descubrí cómo la lectura de la Biblia puede acompañar tu vida con sabiduría, esperanza y propósito.">
+  <title>Una palabra para cada día | Descubrí la Biblia</title>
+
+  <style>
+    :root {
+      --forest: #173c32;
+      --forest-light: #245747;
+      --cream: #f7f4eb;
+      --paper: #fffdf7;
+      --ink: #1d2b25;
+      --muted: #68736c;
+      --gold: #d9ae64;
+      --gold-light: #f0d8a6;
+      --line: rgba(29, 43, 37, .12);
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      --shadow: 0 24px 70px rgba(25, 47, 38, .12);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    button { font: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(247, 244, 235, .92);
+      border-bottom: 1px solid rgba(29, 43, 37, .08);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      width: min(1160px, calc(100% - 48px));
+      min-height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: var(--gold-light);
+    }
+
+    .brand-mark svg { width: 19px; height: 19px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: #536159;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover { color: var(--forest); }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--forest);
+      color: white !important;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      background: var(--forest-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: var(--forest);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .menu-toggle svg { display: block; width: 24px; height: 24px; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 78% 19%, rgba(217, 174, 100, .19), transparent 32%),
+        linear-gradient(128deg, #14392f 0%, #1b4739 58%, #275441 100%);
+      color: white;
+    }
+
+    .hero::before,
+    .hero::after {
+      position: absolute;
+      content: "";
+      border: 1px solid rgba(240, 216, 166, .14);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 590px;
+      height: 590px;
+      right: -190px;
+      top: -320px;
+    }
+
+    .hero::after {
+      width: 760px;
+      height: 760px;
+      right: -280px;
+      top: -400px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1160px, calc(100% - 48px));
+      min-height: 620px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: 48px;
+      padding: 66px 0 82px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      content: "";
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    .hero h1 {
+      max-width: 620px;
+      margin: 22px 0 22px;
+      font-family: var(--serif);
+      font-size: clamp(48px, 6.2vw, 78px);
+      font-weight: 400;
+      letter-spacing: -.055em;
+      line-height: .99;
+    }
+
+    .hero h1 em {
+      color: var(--gold-light);
+      font-weight: 400;
+    }
+
+    .hero-copy {
+      max-width: 490px;
+      margin-bottom: 32px;
+      color: rgba(255, 255, 255, .76);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 21px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .button:hover { transform: translateY(-2px); }
+
+    .button-light {
+      background: var(--gold-light);
+      color: var(--forest);
+    }
+
+    .button-light:hover { background: #f7e4ba; }
+
+    .button-ghost {
+      border-color: rgba(255, 255, 255, .3);
+      color: white;
+    }
+
+    .button-ghost:hover { border-color: rgba(255, 255, 255, .7); }
+
+    .button svg { width: 16px; height: 16px; }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 34px;
+      color: rgba(255, 255, 255, .61);
+      font-size: 12px;
+      letter-spacing: .02em;
+    }
+
+    .hero-note span {
+      display: grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      border: 1px solid rgba(240, 216, 166, .35);
+      border-radius: 50%;
+      color: var(--gold-light);
+      font-size: 12px;
+    }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 420px;
+    }
+
+    .art-glow {
+      position: absolute;
+      width: min(440px, 90%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(239, 208, 146, .2), rgba(239, 208, 146, .04) 55%, transparent 72%);
+      filter: blur(4px);
+    }
+
+    .art-ring {
+      position: absolute;
+      width: 360px;
+      max-width: 82%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(240, 216, 166, .2);
+      border-radius: 50%;
+    }
+
+    .art-ring::before,
+    .art-ring::after {
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(240, 216, 166, .12);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .art-ring::after { inset: 48px; }
+
+    .book-illustration {
+      position: relative;
+      z-index: 1;
+      width: min(470px, 100%);
+      filter: drop-shadow(0 28px 30px rgba(5, 22, 15, .35));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .art-label {
+      position: absolute;
+      z-index: 2;
+      right: 4%;
+      bottom: 13%;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 14px 17px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 14px;
+      background: rgba(18, 51, 41, .68);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, .15);
+      backdrop-filter: blur(14px);
+    }
+
+    .art-label-icon {
+      display: grid;
+      place-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 11px;
+      background: rgba(240, 216, 166, .16);
+      color: var(--gold-light);
+    }
+
+    .art-label-icon svg { width: 18px; height: 18px; }
+
+    .art-label strong {
+      display: block;
+      margin-bottom: 3px;
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .art-label small {
+      color: rgba(255, 255, 255, .62);
+      font-size: 10px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .section {
+      width: min(1160px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 108px 0;
+    }
+
+    .section-heading {
+      max-width: 650px;
+      margin: 0 auto 55px;
+      text-align: center;
+    }
+
+    .section-heading .eyebrow {
+      color: #98763d;
+      justify-content: center;
+    }
+
+    .section-heading .eyebrow::before { background: #c5a05a; }
+
+    .section-heading h2 {
+      margin: 17px 0 15px;
+      font-family: var(--serif);
+      font-size: clamp(36px, 4.5vw, 55px);
+      font-weight: 400;
+      letter-spacing: -.045em;
+      line-height: 1.06;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .benefit-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 276px;
+      padding: 30px;
+      border: 1px solid rgba(29, 43, 37, .08);
+      border-radius: var(--radius);
+      background: var(--paper);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .benefit-card::after {
+      position: absolute;
+      right: -40px;
+      bottom: -62px;
+      width: 140px;
+      height: 140px;
+      border: 1px solid rgba(217, 174, 100, .2);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .benefit-number {
+      color: #9a7c4b;
+      font-family: var(--serif);
+      font-size: 13px;
+      letter-spacing: .12em;
+    }
+
+    .benefit-icon {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      margin: 25px 0 19px;
+      border-radius: 15px;
+      background: #edf1e9;
+      color: var(--forest);
+    }
+
+    .benefit-icon svg { width: 22px; height: 22px; }
+
+    .benefit-card h3 {
+      margin-bottom: 9px;
+      font-family: var(--serif);
+      font-size: 23px;
+      font-weight: 400;
+      letter-spacing: -.02em;
+    }
+
+    .benefit-card p {
+      max-width: 290px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .quote-band {
+      position: relative;
+      overflow: hidden;
+      background: #e9e9dd;
+    }
+
+    .quote-band::before {
+      position: absolute;
+      top: -180px;
+      left: -90px;
+      width: 430px;
+      height: 430px;
+      border: 1px solid rgba(23, 60, 50, .09);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .quote-inner {
+      position: relative;
+      width: min(920px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 86px 0 92px;
+      text-align: center;
+    }
+
+    .quote-mark {
+      color: #b69558;
+      font-family: var(--serif);
+      font-size: 68px;
+      line-height: .7;
+    }
+
+    .quote-text {
+      max-width: 790px;
+      min-height: 94px;
+      margin: 24px auto 19px;
+      font-family: var(--serif);
+      font-size: clamp(27px, 4vw, 42px);
+      letter-spacing: -.035em;
+      line-height: 1.2;
+      transition: opacity .2s ease;
+    }
+
+    .quote-source {
+      color: #67736b;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .quote-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .quote-button {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(23, 60, 50, .2);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--forest);
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+
+    .quote-button:hover {
+      background: var(--forest);
+      color: white;
+    }
+
+    .quote-button svg { width: 16px; height: 16px; }
+
+    .quote-dots { display: flex; gap: 6px; }
+
+    .quote-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(23, 60, 50, .25);
+    }
+
+    .quote-dot.active { background: var(--forest); }
+
+    .practice-layout {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 74px;
+    }
+
+    .practice-copy .eyebrow { color: #98763d; }
+    .practice-copy .eyebrow::before { background: #c5a05a; }
+
+    .practice-copy h2 {
+      margin: 17px 0 16px;
+      font-family: var(--serif);
+      font-size: clamp(38px, 4vw, 52px);
+      font-weight: 400;
+      letter-spacing: -.045em;
+      line-height: 1.04;
+    }
+
+    .practice-copy > p {
+      max-width: 440px;
+      margin-bottom: 27px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .practice-list {
+      display: grid;
+      gap: 17px;
+    }
+
+    .practice-step {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 15px;
+      align-items: start;
+    }
+
+    .step-num {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      border: 1px solid rgba(23, 60, 50, .16);
+      border-radius: 50%;
+      color: var(--forest);
+      font-family: var(--serif);
+      font-size: 15px;
+    }
+
+    .practice-step h3 {
+      margin: 1px 0 5px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .practice-step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .practice-card {
+      position: relative;
+      padding: 40px;
+      border-radius: 28px;
+      background: var(--forest);
+      color: white;
+      box-shadow: 0 26px 70px rgba(23, 60, 50, .19);
+    }
+
+    .practice-card::after {
+      position: absolute;
+      right: -43px;
+      bottom: -43px;
+      width: 160px;
+      height: 160px;
+      border: 1px solid rgba(240, 216, 166, .18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .practice-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, .14);
+    }
+
+    .practice-card-top span {
+      color: var(--gold-light);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .practice-card-top svg {
+      width: 23px;
+      height: 23px;
+      color: var(--gold-light);
+    }
+
+    .reading-days {
+      display: grid;
+      gap: 0;
+      margin-top: 12px;
+    }
+
+    .reading-day {
+      display: grid;
+      grid-template-columns: 34px 1fr 20px;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .reading-day:last-child { border-bottom: 0; }
+
+    .day-index {
+      color: rgba(255, 255, 255, .45);
+      font-family: var(--serif);
+      font-size: 13px;
+    }
+
+    .reading-day strong {
+      display: block;
+      margin-bottom: 4px;
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 400;
+    }
+
+    .reading-day small {
+      color: rgba(255, 255, 255, .55);
+      font-size: 11px;
+    }
+
+    .day-check {
+      display: grid;
+      place-items: center;
+      width: 19px;
+      height: 19px;
+      border: 1px solid rgba(240, 216, 166, .45);
+      border-radius: 50%;
+      color: var(--gold-light);
+    }
+
+    .day-check svg { width: 11px; height: 11px; }
+
+    .reading-day:first-child .day-check {
+      border-color: var(--gold-light);
+      background: var(--gold-light);
+      color: var(--forest);
+    }
+
+    .closing {
+      padding: 0 24px 100px;
+    }
+
+    .closing-card {
+      position: relative;
+      overflow: hidden;
+      width: min(1160px, 100%);
+      margin: 0 auto;
+      padding: 70px 30px;
+      border-radius: 30px;
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(217, 174, 100, .17), transparent 38%),
+        var(--forest);
+      color: white;
+      text-align: center;
+    }
+
+    .closing-card::before,
+    .closing-card::after {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border: 1px solid rgba(240, 216, 166, .13);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .closing-card::before { left: -130px; top: -150px; }
+    .closing-card::after { right: -110px; bottom: -190px; }
+
+    .closing-content { position: relative; z-index: 1; }
+
+    .closing-card .eyebrow { justify-content: center; }
+
+    .closing-card h2 {
+      max-width: 650px;
+      margin: 18px auto 15px;
+      font-family: var(--serif);
+      font-size: clamp(37px, 5vw, 58px);
+      font-weight: 400;
+      letter-spacing: -.045em;
+      line-height: 1.04;
+    }
+
+    .closing-card p {
+      max-width: 510px;
+      margin: 0 auto 28px;
+      color: rgba(255, 255, 255, .68);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer {
+      padding: 27px 24px;
+      border-top: 1px solid rgba(29, 43, 37, .1);
+      color: #778078;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: .04em;
+    }
+
+    .footer span { color: var(--forest); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 850px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 74px 0 50px;
+      }
+
+      .hero-copy { max-width: 600px; }
+      .hero-art { min-height: 330px; }
+      .book-illustration { width: min(390px, 90%); }
+      .art-ring { width: 310px; }
+      .art-label { right: 7%; bottom: 6%; }
+      .practice-layout { gap: 42px; }
+      .benefit-card { padding: 25px; }
+    }
+
+    @media (max-width: 650px) {
+      .nav {
+        width: min(100% - 36px, 1160px);
+        min-height: 68px;
+      }
+
+      .menu-toggle { display: block; }
+
+      .nav-links {
+        position: absolute;
+        top: 67px;
+        left: 0;
+        right: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 18px 19px;
+        border-bottom: 1px solid rgba(29, 43, 37, .1);
+        background: var(--cream);
+      }
+
+      .nav-links.open { display: flex; flex-direction: column; }
+
+      .nav-links a {
+        padding: 13px 4px;
+        border-bottom: 1px solid rgba(29, 43, 37, .07);
+      }
+
+      .nav-links .nav-cta {
+        margin-top: 11px;
+        padding: 13px 18px;
+        border: 0;
+        text-align: center;
+      }
+
+      .hero-inner,
+      .section { width: min(100% - 38px, 1160px); }
+
+      .hero-inner {
+        min-height: auto;
+        padding-top: 60px;
+      }
+
+      .hero h1 { font-size: clamp(46px, 12vw, 64px); }
+      .hero-copy { font-size: 14px; }
+      .hero-art { min-height: 285px; }
+      .book-illustration { width: min(330px, 92%); }
+      .art-ring { width: 260px; }
+      .art-label { right: 0; bottom: 3%; padding: 11px 13px; }
+
+      .section { padding: 78px 0; }
+      .section-heading { margin-bottom: 35px; }
+
+      .benefits { grid-template-columns: 1fr; gap: 12px; }
+      .benefit-card { min-height: 0; padding: 25px; }
+      .benefit-icon { margin: 19px 0 14px; }
+
+      .quote-inner { padding: 72px 0 76px; }
+      .quote-text { min-height: 124px; }
+
+      .practice-layout { grid-template-columns: 1fr; gap: 35px; }
+      .practice-card { padding: 28px 24px; }
+
+      .closing { padding: 0 18px 72px; }
+      .closing-card { padding: 58px 23px; border-radius: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="Una palabra para cada día, inicio">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 3v18M7 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M5 21h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </span>
+        Una palabra cada día
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#beneficios">Por qué leerla</a>
+        <a href="#reflexion">Una palabra</a>
+        <a href="#comenzar">Cómo empezar</a>
+        <a class="nav-cta" href="#comenzar">Empezar hoy</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-inner">
+        <div class="hero-copy-wrap">
+          <div class="eyebrow">Una invitación para cada día</div>
+          <h1>Un libro antiguo.<br>Una palabra <em>viva.</em></h1>
+          <p class="hero-copy">
+            La Biblia puede acercarte a Dios, ayudarte a encontrar sabiduría
+            para tus decisiones y recordarte que no estás solo en el camino.
+            Empezá con unos minutos y un corazón dispuesto.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-light" href="#beneficios">
+              Descubrí sus beneficios
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a class="button button-ghost" href="#comenzar">Cómo empezar</a>
+          </div>
+
+          <div class="hero-note">
+            <span aria-hidden="true">✦</span>
+            No necesitás saberlo todo. Solo dar el primer paso.
+          </div>
+        </div>
+
+        <div class="hero-art" aria-label="Ilustración de una Biblia abierta bajo la luz">
+          <div class="art-glow"></div>
+          <div class="art-ring"></div>
+
+          <svg class="book-illustration" viewBox="0 0 520 420" fill="none" role="img" aria-hidden="true">
+            <defs>
+              <linearGradient id="cover" x1="110" y1="240" x2="416" y2="371" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#E4C786"/>
+                <stop offset="1" stop-color="#B58D4D"/>
+              </linearGradient>
+              <linearGradient id="pagesLeft" x1="85" y1="149" x2="263" y2="328" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFF9E9"/>
+                <stop offset="1" stop-color="#D9CBAA"/>
+              </linearGradient>
+              <linearGradient id="pagesRight" x1="260" y1="148" x2="442" y2="327" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F7F0DE"/>
+                <stop offset="1" stop-color="#D6C7A5"/>
+              </linearGradient>
+              <linearGradient id="spine" x1="254" y1="180" x2="269" y2="350" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#B68D4C"/>
+                <stop offset="1" stop-color="#876333"/>
+              </linearGradient>
+            </defs>
+
+            <circle cx="263" cy="205" r="122" fill="#D7B66F" fill-opacity=".06"/>
+            <circle cx="263" cy="205" r="100" stroke="#F0D8A6" stroke-opacity=".18"/>
+
+            <path d="M78 271c53-18 119-13 185 19v29c-66-31-132-37-185-18v-30Z" fill="#876333"/>
+            <path d="M263 290c65-32 131-37 185-19v30c-53-19-119-13-185 18v-29Z" fill="#74552F"/>
+            <path d="M78 264c54-21 119-15 185 18v13c-66-32-131-38-185-17v-14Z" fill="url(#cover)"/>
+            <path d="M263 282c65-33 131-39 185-18v14c-54-21-119-15-185 17v-13Z" fill="#C29A59"/>
+
+            <path d="M82 155c57-26 119-18 181 14v126c-63-31-124-40-181-18V155Z" fill="url(#pagesLeft)"/>
+            <path d="M263 169c62-32 124-40 181-14v122c-57-22-118-13-181 18V169Z" fill="url(#pagesRight)"/>
+            <path d="M263 169c4 0 8 2 12 4v122c-4-2-8-4-12-5V169Z" fill="url(#spine)"/>
+
+            <path d="M91 166c52-19 108-13 162 13M91 181c52-19 108-13 162 13M91 196c52-19 108-13 162 13M91 211c52-19 108-13 162 13M91 226c52-19 108-13 162 13M91 241c52-19 108-13 162 13" stroke="#9E9278" stroke-opacity=".42" stroke-width="2" stroke-linecap="round"/>
+            <path d="M274 179c52-26 108-32 161-14M274 194c52-26 108-32 161-14M274 209c52-26 108-32 161-14M274 224c52-26 108-32 161-14M274 239c52-26 108-32 161-14M274 254c52-26 108-32 161-14" stroke="#9E9278" stroke-opacity=".42" stroke-width="2" stroke-linecap="round"/>
+
+            <path d="M263 153v137" stroke="#F5E7C5" stroke-opacity=".65" stroke-width="2"/>
+            <path d="M234 115h58M263 86v58" stroke="#EBD49E" stroke-opacity=".75" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="263" cy="115" r="42" stroke="#EBD49E" stroke-opacity=".2"/>
+            <path d="M107 303c51-15 106-6 156 19M419 303c-51-15-106-6-156 19" stroke="#F4DEAA" stroke-opacity=".45" stroke-width="2"/>
+          </svg>
+
+          <div class="art-label">
+            <span class="art-label-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3v18M7 8h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span>
+              <strong>Encontrá dirección</strong>
+              <small>Un momento para detenerte</small>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beneficios">
+      <div class="section-heading reveal">
+        <div class="eyebrow">Una lectura que acompaña</div>
+        <h2>¿Qué puede aportar<br>a tu vida?</h2>
+        <p>
+          Leer la Biblia no es una fórmula mágica ni una carrera. Es abrir un espacio
+          para escuchar, aprender y mirar la vida desde una nueva perspectiva.
+        </p>
+      </div>
+
+      <div class="benefits">
+        <article class="benefit-card reveal">
+          <span class="benefit-number">01 / SABIDURÍA</span>
+          <div class="benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 19.5A2.5 2.5 0 0 1 7.5 17H20M7.5 3H20v18H7.5A2.5 2.5 0 0 1 5 18.5v-13A2.5 2.5 0 0 1 7.5 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M9 7h7M9 10h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Te da perspectiva</h3>
+          <p>
+            Sus relatos y enseñanzas pueden ayudarte a pensar tus decisiones,
+            relaciones y desafíos con más profundidad.
+          </p>
+        </article>
+
+        <article class="benefit-card reveal">
+          <span class="benefit-number">02 / ESPERANZA</span>
+          <div class="benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 21s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6.5-8 11-8 11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M8.5 12.2h2l1.2-2.4 1.7 4.3 1.1-1.9h1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Te recuerda que hay esperanza</h3>
+          <p>
+            En sus páginas aparecen personas reales, tiempos difíciles y la
+            posibilidad de volver a empezar con fe.
+          </p>
+        </article>
+
+        <article class="benefit-card reveal">
+          <span class="benefit-number">03 / CONOCIMIENTO</span>
+          <div class="benefit-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3a7 7 0 0 0-4 12.7c.8.6 1 1.2 1 2.3h6c0-1.1.2-1.7 1-2.3A7 7 0 0 0 12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M9 21h6M9.5 18h5M12 6v2M7.5 8.5 9 10M16.5 8.5 15 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Te ayuda a crecer</h3>
+          <p>
+            Sus palabras invitan a conocerte mejor, cultivar la paciencia y
+            construir una vida con propósito.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="quote-band" id="reflexion">
+      <div class="quote-inner reveal">
+        <div class="quote-mark" aria-hidden="true">“</div>
+        <p class="quote-text" id="quoteText">Lámpara es a mis pies tu palabra, y lumbrera a mi camino.</p>
+        <div class="quote-source" id="quoteSource">Salmos 119:105 · RVR1960</div>
+
+        <div class="quote-controls" aria-label="Cambiar pasaje bíblico">
+          <button class="quote-button" id="previousQuote" aria-label="Pasaje anterior">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m15 18-6-6 6-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="quote-dots" id="quoteDots" aria-hidden="true"></div>
+          <button class="quote-button" id="nextQuote" aria-label="Pasaje siguiente">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="comenzar">
+      <div class="practice-layout">
+        <div class="practice-copy reveal">
+          <div class="eyebrow">Un comienzo sencillo</div>
+          <h2>No hace falta leerla entera hoy.</h2>
+          <p>
+            Empezá poco a poco. La constancia puede abrir un espacio nuevo en tu
+            día para reflexionar, orar y acercarte a Dios.
+          </p>
+
+          <div class="practice-list">
+            <div class="practice-step">
+              <span class="step-num">1</span>
+              <div>
+                <h3>Elegí un momento tranquilo</h3>
+                <p>Con cinco o diez minutos alcanza para empezar.</p>
+              </div>
+            </div>
+            <div class="practice-step">
+              <span class="step-num">2</span>
+              <div>
+                <h3>Leé un pasaje breve</h3>
+                <p>Podés comenzar por un Evangelio, como Marcos o Juan.</p>
+              </div>
+            </div>
+            <div class="practice-step">
+              <span class="step-num">3</span>
+              <div>
+                <h3>Preguntate qué te deja</h3>
+                <p>¿Qué aprendés sobre Dios, sobre otros o sobre vos?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="practice-card reveal" aria-label="Ejemplo de una semana de lectura">
+          <div class="practice-card-top">
+            <span>Una semana para empezar</span>
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13H4V6a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="reading-days">
+            <div class="reading-day">
+              <span class="day-index">01</span>
+              <span><strong>El comienzo</strong><small>Juan 1:1–14</small></span>
+              <span class="day-check" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none"><path d="m3 8 3 3 7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+            <div class="reading-day">
+              <span class="day-index">02</span>
+              <span><strong>Una invitación</strong><small>Mateo 11:28–30</small></span>
+              <span class="day-check" aria-hidden="true"></span>
+            </div>
+            <div class="reading-day">
+              <span class="day-index">03</span>
+              <span><strong>Confiar en el camino</strong><small>Proverbios 3:5–6</small></span>
+              <span class="day-check" aria-hidden="true"></span>
+            </div>
+            <div class="reading-day">
+              <span class="day-index">04</span>
+              <span><strong>Amar al prójimo</strong><small>Lucas 10:25–37</small></span>
+              <span class="day-check" aria-hidden="true"></span>
+            </div>
+            <div class="reading-day">
+              <span class="day-index">05</span>
+              <span><strong>Una nueva esperanza</strong><small>Salmos 23</small></span>
+              <span class="day-check" aria-hidden="true"></span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="closing-card">
+        <div class="closing-content reveal">
+          <div class="eyebrow">Tu próximo paso</div>
+          <h2>La aventura puede empezar con una sola página.</h2>
+          <p>
+            Abrí la Biblia, elegí un pasaje y regalate unos minutos.
+            A veces, una palabra alcanza para empezar una conversación con Dios.
+          </p>
+          <a class="button button-light" href="#comenzar">
+            Encontrá tu primer pasaje
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Hecho con fe y esperanza <span>·</span> Una palabra para cada día
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menú");
+      });
+    });
+
+    const passages = [
+      {
+        text: "Lámpara es a mis pies tu palabra, y lumbrera a mi camino.",
+        source: "Salmos 119:105 · RVR1960"
+      },
+      {
+        text: "Toda la Escritura es inspirada por Dios, y útil para enseñar.",
+        source: "2 Timoteo 3:16 · RVR1960"
+      },
+      {
+        text: "La fe es por el oír, y el oír, por la palabra de Dios.",
+        source: "Romanos 10:17 · RVR1960"
+      }
+    ];
+
+    let currentPassage = 0;
+    const quoteText = document.getElementById("quoteText");
+    const quoteSource = document.getElementById("quoteSource");
+    const quoteDots = document.getElementById("quoteDots");
+
+    passages.forEach((_, index) => {
+      const dot = document.createElement("span");
+      dot.className = "quote-dot" + (index === 0 ? " active" : "");
+      quoteDots.appendChild(dot);
+    });
+
+    function showPassage(index) {
+      currentPassage = (index + passages.length) % passages.length;
+      quoteText.style.opacity = "0";
+
+      window.setTimeout(() => {
+        quoteText.textContent = passages[currentPassage].text;
+        quoteSource.textContent = passages[currentPassage].source;
+        quoteDots.querySelectorAll(".quote-dot").forEach((dot, dotIndex) => {
+          dot.classList.toggle("active", dotIndex === currentPassage);
+        });
+        quoteText.style.opacity = "1";
+      }, 160);
+    }
+
+    document.getElementById("previousQuote").addEventListener("click", () => {
+      showPassage(currentPassage - 1);
+    });
+
+    document.getElementById("nextQuote").addEventListener("click", () => {
+      showPassage(currentPassage + 1);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      observer.observe(element);
+    });
+  </script>
+</body>
+</html>
